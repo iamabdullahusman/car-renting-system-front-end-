@@ -1,0 +1,43 @@
+<nz-spin ngSkipHydration [nzSpinning]="isSpinning" [nzSize]="'large'" nzTip="Working.......">
+    <nz-table #basicTable [nzData]="bookedCars" [nzPageSize]="20" [nzShowPagination]="'false'">
+        <thead>
+            <tr>
+                <!-- <th style="font-weight: bolder; color: #003973;">Username</th>
+                <th style="font-weight: bolder; color: #003973;">Email</th> -->
+                <th style="font-weight: bolder; color: #003973;">From</th>
+                <th style="font-weight: bolder; color: #003973;">To</th>
+                <th style="font-weight: bolder; color: #003973;">Days</th>
+                <th style="font-weight: bolder; color: #003973;">Price</th>
+                <th style="font-weight: bolder; color: #003973;">Status</th>
+                <th style="font-weight: bolder; color: #003973;">Actions</th> 
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let booking of basicTable.data">
+                <!-- <td>{{booking.username}}</td>
+                <td>{{booking.email}}</td> -->
+                <td>{{booking.fromDate | date: 'MMM d , y' }}</td>
+                <td>{{booking.toDate | date: 'MMM d , y' }}</td>
+                <td>{{booking.days}}</td>
+                <td>{{booking.amount}}</td>
+                <td>
+                    <strong [ngStyle]="{'color': booking.status === 'ACCEPTED' ? 'green' : booking.status === 'Rejected' ? 'blue': booking.status==='PENDING'}" >
+                   {{booking.status}}
+                    </strong>
+                </td>
+                    <td>
+                    <span *ngIf="booking.status == 'PENDING'">
+                        <button style="margin-left: 10px;" nzSize="small" nz-button nz-Type="Primary"  
+                        (click)="changeBookingStatus(booking.id,'Accepted') " nzDanger  >Accepted</button>
+                        <button style="margin-left: 10px;" nzSize="small" nz-button nz-Type="Primary"  
+                        (click)="changeBookingStatus(booking.id,'Reject') " nzDanger  >Rejected</button>
+                        
+                    </span>
+                </td> 
+
+            </tr>
+        </tbody>
+
+    </nz-table>
+
+</nz-spin>
